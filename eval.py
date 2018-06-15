@@ -71,7 +71,8 @@ def test():
         for i in range(50):
             if truths[i][1] == 0:
                 return i
-
+        return 50
+    
     model.eval()
     num_classes = model.module.num_classes
     anchors     = model.module.anchors
