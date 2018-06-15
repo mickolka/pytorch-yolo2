@@ -170,7 +170,7 @@ class RegionLoss(nn.Module):
         loss_w = self.coord_scale * nn.MSELoss(size_average=False)(w*coord_mask, tw*coord_mask)/2.0
         loss_h = self.coord_scale * nn.MSELoss(size_average=False)(h*coord_mask, th*coord_mask)/2.0
         loss_conf = nn.MSELoss(size_average=False)(conf*conf_mask, tconf*conf_mask)/2.0
-        loss_cls = self.class_scale * nn.CrossEntropyLoss(size_average=False)(cls, tcls)
+        loss_cls = self.class_scale * nn.CrossEntropyLoss(size_average=False)(cls, tcls) if cls.size(0) > 0 else 0
         loss = loss_x + loss_y + loss_w + loss_h + loss_conf + loss_cls
         t4 = time.time()
         if False:
